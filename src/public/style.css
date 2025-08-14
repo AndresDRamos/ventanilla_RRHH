@@ -6,13 +6,36 @@ body {
   min-height: 100vh;
 }
 
+/* Logo y encabezado */
+.login-header {
+  text-align: center;
+  margin-bottom: 24px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.company-logo {
+  height: 60px;
+  width: auto;
+  margin-bottom: 10px;
+  object-fit: contain;
+}
+
+.login-header h1 {
+  margin: 0;
+  color: #333;
+  font-weight: 300;
+  font-size: 1.8rem;
+}
+
 #app { 
   max-width: 600px; 
   margin: 0 auto; 
-  background: #fff; 
+  background: transparent; 
   padding: 32px; 
   border-radius: 12px; 
-  box-shadow: 0 8px 32px rgba(0,0,0,0.1); 
 }
 
 #app.admin-panel {
@@ -34,30 +57,79 @@ h2 {
 }
 
 .login-container {
+  background: #fff;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.login-tabs {
+  display: flex;
+  background: #fff;
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.tab {
+  flex: 1;
+  padding: 16px 20px;
+  text-align: center;
+  cursor: pointer;
   background: #f8f9fa;
-  padding: 24px;
-  border-radius: 8px;
-  margin-bottom: 20px;
+  color: #6c757d;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.tab:hover {
+  background: #e9ecef;
+  color: #495057;
+}
+
+.tab.active {
+  background: #007bff;
+  color: white;
+  border-bottom-color: #0056b3;
+}
+
+.tab.admin-tab.active {
+  background: #dc3545;
+  border-bottom-color: #c82333;
+}
+
+.tab .icon-user,
+.tab .icon-admin {
+  font-size: 18px;
+}
+
+.login-form-container {
+  background: #fff;
+  padding: 32px;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  border-top: none;
+  transition: all 0.3s ease;
+}
+
+.login-form-container.employee-theme {
+  border-top: 4px solid #007bff;
+}
+
+.login-form-container.admin-theme {
+  border-top: 4px solid #dc3545;
+  background: linear-gradient(145deg, #fff 0%, #fff5f5 100%);
 }
 
 .admin-toggle {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.admin-toggle button {
-  background: #6c757d;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background 0.3s ease;
-}
-
-.admin-toggle button:hover {
-  background: #5a6268;
+  display: none; /* Ocultar el botón anterior */
 }
 
 input, select, textarea, button { 
@@ -81,6 +153,30 @@ button {
 
 button:hover { 
   background: #0056b3; 
+}
+
+/* Estilos específicos para formularios */
+.login-form-container.employee-theme button {
+  background: #007bff;
+}
+
+.login-form-container.employee-theme button:hover {
+  background: #0056b3;
+}
+
+.login-form-container.admin-theme button {
+  background: #dc3545;
+}
+
+.login-form-container.admin-theme button:hover {
+  background: #c82333;
+}
+
+.login-form-container h2 {
+  margin-top: 0;
+  margin-bottom: 24px;
+  text-align: center;
+  color: #333;
 }
 
 label {
@@ -191,6 +287,7 @@ label {
   padding: 16px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
 }
 
 .folio-card:hover {
@@ -205,6 +302,7 @@ label {
   margin-bottom: 12px;
   border-bottom: 1px solid #eee;
   padding-bottom: 8px;
+  padding-right: 80px;
 }
 
 .folio-id {
@@ -214,15 +312,20 @@ label {
 }
 
 .folio-priority {
+  position: absolute;
+  top: 12px;
+  right: 12px;
   padding: 4px 8px;
   border-radius: 12px;
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  z-index: 1;
 }
 
-.priority-alta { background: #ff6b6b; color: white; }
-.priority-media { background: #ffd43b; color: #333; }
-.priority-baja { background: #51cf66; color: white; }
+.priority-alta { background: #dc3545; color: white; }
+.priority-media { background: #ffc107; color: #333; }
+.priority-baja { background: #28a745; color: white; }
 
 .folio-content {
   font-size: 14px;

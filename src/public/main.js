@@ -9,15 +9,27 @@ let tipoFilter = 'todos';
 
 function renderLogin() {
   app.innerHTML = `
-    <h1>Ventanilla Capital Humano</h1>
-    
-    <div class="admin-toggle">
-      <button onclick="toggleAdminMode()" id="adminToggle">Acceder como administrador</button>
+    <div class="login-header">
+      <img src="logo.png" alt="EZI Logo" class="company-logo">
+      <h1>Ventanilla Capital Humano</h1>
     </div>
     
     <div class="login-container">
-      <div id="loginForm">
-        ${renderEmpleadoForm()}
+      <div class="login-tabs">
+        <div class="tab ${!isAdminMode ? 'active' : ''}" onclick="switchToEmployeeMode()">
+          <i class="icon-user">👤</i>
+          <span>Empleado</span>
+        </div>
+        <div class="tab admin-tab ${isAdminMode ? 'active' : ''}" onclick="switchToAdminMode()">
+          <i class="icon-admin">⚙️</i>
+          <span>Administrador</span>
+        </div>
+      </div>
+      
+      <div class="login-form-container ${isAdminMode ? 'admin-theme' : 'employee-theme'}" id="loginFormContainer">
+        <div id="loginForm">
+          ${isAdminMode ? renderAdminForm() : renderEmpleadoForm()}
+        </div>
       </div>
     </div>
   `;
@@ -49,18 +61,20 @@ function renderAdminForm() {
   `;
 }
 
+window.switchToEmployeeMode = function() {
+  isAdminMode = false;
+  renderLogin();
+};
+
+window.switchToAdminMode = function() {
+  isAdminMode = true;
+  renderLogin();
+};
+
+// Mantener compatibilidad con función anterior
 window.toggleAdminMode = function() {
   isAdminMode = !isAdminMode;
-  const loginForm = document.getElementById('loginForm');
-  const toggleButton = document.getElementById('adminToggle');
-  
-  if (isAdminMode) {
-    loginForm.innerHTML = renderAdminForm();
-    toggleButton.textContent = 'Acceder como empleado';
-  } else {
-    loginForm.innerHTML = renderEmpleadoForm();
-    toggleButton.textContent = 'Acceder como administrador';
-  }
+  renderLogin();
 };
 
 function handleEmpleadoLogin(e) {
